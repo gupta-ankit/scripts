@@ -1,0 +1,2 @@
+#!/bin/sh
+git ls-files | cut -f1-$1 -d/ | uniq
