@@ -1,0 +1,73 @@
+#!/usr/bin/groovy
+def printErr = System.err.&println
+
+if (args.length != 2) {
+   printErr "Invalid number of arguments."
+   printErr usage()
+   System.exit(-1)
+}
+
+def source_dir = new File(args[0])
+if (!source_dir.isDirectory()){
+   printErr "${source_dir} is not a directory."
+   printErr usage()
+   System.exit(-1)
+}
+
+def renaming_list = new File(args[1])
+if (!renaming_list.isFile()){
+   printErr "${renaming_list} is not a file."
+   printErr usage()
+   System.exit(-1)
+}
+
+def contained_files = source_dir.listFiles()
+contained_files = contained_files.sort()
+
+lines = renaming_list.readLines()
+lines = clean_lines(lines)
+
+if (lines.size() != contained_files.size()) {
+   printErr "The number of lines in the renaming list should be same as the number of files in the source directory"
+   printErr "Number of files in source directory : ${contained_files.size()}"
+   printErr "Number of lines in renaming list : ${lines.size()}"
+   System.exit(-1)
+}
+
+println "After renaming the new files names would be :"
+
+lines.size().times {
+  println "${contained_files[it]} ==> ${lines[it]}"
+}
+
+def input = ""
+System.in.withReader{
+		println "Do you wish to continue? Enter 'yes' to continue. Anythin else will terminate execution"
+		input = it.readLine()
+}
+
+if (input.equals('yes')){
+   //continue renaming
+   lines.size().times {
+   	  contained_files[it].renameTo(lines[it])
+   }
+}else{
+   return
+}
+
+
+
+def usage(){
+	"Usage: batch_renamer source_dir new_name_file"
+}
+
+def clean_lines(lines) {
+	def cleanedLines = []
+	lines.each{
+		if (it.trim().equals("")){
+		}else{
+			cleanedLines << it
+		}
+	}
+	cleanedLines
+}
