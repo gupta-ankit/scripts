@@ -1,0 +1,5 @@
+if [ $# -eq 1 ]; then
+	ps -aef | grep -v grep | grep picc | awk '{print $2}' | xargs kill -9
+else
+	echo "Please pass a pattern to filter executables"
+fi
