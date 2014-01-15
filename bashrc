@@ -47,5 +47,5 @@ if [ $? -eq 0 ]; then \
   fi) '$Color_Off'\n$EndSymbol "; \
 else \
   # @2 - Prompt when not in GIT repo
-  echo " \n$EndSymbol ";
+  echo " '$Color_Off'\n$EndSymbol ";
 fi)'
