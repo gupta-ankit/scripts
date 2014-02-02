@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use Switch;
+
+sub get_java_home
+{
+	my ($jversion) = (@_);
+	if($jversion)
+	{
+		return "/usr/lib/jvm/java-$jversion-openjdk-i386"
+	}
+}
+
+$javac_str = `update-alternatives --list javac`;
+@java_homes = split(/\n/, $javac_str);
+
+$ENV{T}="${T}:/home/ankit";
+
+switch ($ARGV[0]) {
+
+	case [6..7] {
+					printf "export JAVA_HOME=%s", get_java_home($ARGV[0])
+				}
+	else {print "Invalid Java version"}
+}

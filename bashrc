@@ -49,3 +49,8 @@ else \
   # @2 - Prompt when not in GIT repo
   echo " '$Color_Off'\n$EndSymbol ";
 fi)'
+
+export PATH=$PATH:~/Scripts:~/Installs/gradle-1.6/bin:~/Installs/launch4j
+
+
+echo "Custom bashscipt called"
