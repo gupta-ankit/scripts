@@ -25,10 +25,6 @@ PathShort="\w"
 NewLine="\n"
 User="\u@\h "
 
-
-# This PS1 snippet was adopted from code for MAC/BSD I saw from: http://allancraig.net/index.php?option=com_content&view=article&id=108:ps1-export-command-for-git&catid=45:general&Itemid=96
-# I tweaked it to work on UBUNTU 11.04 & 11.10 plus made it mo' better
-
 export PS1=$StartSymbol[$IBlue$User$Color_Off]-[$IYellow$PathShort]$Color_Off'$(\
 if [ $? -eq 0 ]; then \
   echo  "'$IGreen' :) "; \
@@ -51,6 +47,3 @@ else \
 fi)'
 
 export PATH=$PATH:~/Scripts:~/Installs/gradle-1.6/bin:~/Installs/launch4j
-
-
-echo "Custom bashscipt called"
